@@ -22,17 +22,27 @@ namespace LE_Block {
      * @param s describe parameter here, eg: "Hello"
      * @param e describe parameter here
      */
-    //% block
-    export function foo(n: number, s: string, e: MyEnum): void {
-        // Add code here
+
+    //% blockId=device_set_analog_Frequency block="Set Frequency|Pin %pin| Frq %Frequency"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.tooltips="false"
+
+    export function setFrequency(pin: AnalogPin, Frequency: number): void{
+
+        let period = 1000000/Frequency
+        pins.analogWritePin(pin, 0)
+        pins.analogSetPeriod(pin, period)
     }
 
-    /**
-     * TODO: describe your function here
-     * @param value describe value here, eg: 5
-     */
-    //% block
-    export function fib(value: number): number {
-        return value <= 1 ? value : fib(value -1) + fib(value - 2);
+    //% blockId=device_set_analog_PWM block="Set PWM|Pin %pin| value %PWM"
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
+    //% pin.fieldOptions.tooltips="false"
+    //% PWM.min=0 PWM.max=100
+
+    export function setPWM(pin: AnalogPin, PWM: number): void{
+        PWM = pins.map(PWM, 0, 100, 0, 1023)
+        pins.analogWritePin(pin, PWM)
+        
     }
+
 }
