@@ -40,9 +40,69 @@ namespace LE_Block {
     //% PWM.min=0 PWM.max=100
 
     export function setPWM(pin: AnalogPin, PWM: number): void{
+        PWM = 100 - PWM
         PWM = pins.map(PWM, 0, 100, 0, 1023)
         pins.analogWritePin(pin, PWM)
         
     }
+    
+    //% block="Khởi tạo xe"
+    export function initializationPWM(): void{
+        setFrequency(AnalogPin.P5, 1000);
+        setFrequency(AnalogPin.P6, 1000);
+        setFrequency(AnalogPin.P7, 1000);
+        setFrequency(AnalogPin.P8, 1000);
+    }
 
+    //% block="Đi tiến %wait mili giây | tốc độ %speed"
+    //% pin.fieldOptions.tooltips="false"
+
+    export function up(wait :number, speed :number): void{
+        setPWM(AnalogPin.P5, 0)
+        setPWM(AnalogPin.P6, speed)
+        setPWM(AnalogPin.P7, speed)
+        setPWM(AnalogPin.P8, 0)
+        basic.pause(wait)
+    }
+
+    //% block="Đi lui %wait mili giây | tốc độ %speed"
+    //% pin.fieldOptions.tooltips="false"
+
+    export function down(wait :number, speed :number): void{
+        setPWM(AnalogPin.P5, speed)
+        setPWM(AnalogPin.P6, 100)
+        setPWM(AnalogPin.P7, 100)
+        setPWM(AnalogPin.P8, speed)
+        basic.pause(wait)
+    }
+    //% block="Xoay trái %wait mili giây | tốc độ %speed"
+    //% pin.fieldOptions.tooltips="false"
+
+    export function left(wait :number, speed :number): void{
+        setPWM(AnalogPin.P5, speed)
+        setPWM(AnalogPin.P6, 100)
+        setPWM(AnalogPin.P7, 0)
+        setPWM(AnalogPin.P8, 0)
+        basic.pause(wait)
+    }
+    //% block="Xoay phải %wait mili giây | tốc độ %speed"
+    //% pin.fieldOptions.tooltips="false"
+
+    export function right(wait :number, speed :number): void{
+        setPWM(AnalogPin.P5, 0)
+        setPWM(AnalogPin.P6, 0)
+        setPWM(AnalogPin.P7, 100)
+        setPWM(AnalogPin.P8, speed)
+        basic.pause(wait)
+    }
+    //% weight=100 color=#f54242
+    //% block="Dừng"
+    //% pin.fieldOptions.tooltips="false"
+
+    export function stop(): void{
+        setPWM(AnalogPin.P5, 0)
+        setPWM(AnalogPin.P6, 0)
+        setPWM(AnalogPin.P7, 0)
+        setPWM(AnalogPin.P8, 0)
+    }
 }
