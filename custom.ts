@@ -26,6 +26,7 @@ namespace LE_Block {
     //% blockId=device_set_analog_Frequency block="Set Frequency|Pin %pin| Frq %Frequency"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% pin.fieldOptions.tooltips="false"
+    //% 
 
     export function setFrequency(pin: AnalogPin, Frequency: number): void{
 
@@ -54,7 +55,7 @@ namespace LE_Block {
         setFrequency(AnalogPin.P8, 1000);
     }
 
-    //% block="Đi tiến %wait mili giây | tốc độ %speed"
+    //% block="Đi tiến %wait mili giây| tốc độ %speed"
     //% pin.fieldOptions.tooltips="false"
 
     export function up(wait :number, speed :number): void{
@@ -79,8 +80,8 @@ namespace LE_Block {
     //% pin.fieldOptions.tooltips="false"
 
     export function left(wait :number, speed :number): void{
-        setPWM(AnalogPin.P5, speed)
-        setPWM(AnalogPin.P6, 100)
+        setPWM(AnalogPin.P5, 0)
+        setPWM(AnalogPin.P6, speed)
         setPWM(AnalogPin.P7, 0)
         setPWM(AnalogPin.P8, 0)
         basic.pause(wait)
@@ -91,8 +92,8 @@ namespace LE_Block {
     export function right(wait :number, speed :number): void{
         setPWM(AnalogPin.P5, 0)
         setPWM(AnalogPin.P6, 0)
-        setPWM(AnalogPin.P7, 100)
-        setPWM(AnalogPin.P8, speed)
+        setPWM(AnalogPin.P7, speed)
+        setPWM(AnalogPin.P8, 0)
         basic.pause(wait)
     }
     //% weight=100 color=#f54242
